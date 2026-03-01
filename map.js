@@ -29,7 +29,12 @@ const locations = [
     { name: "Hedrick", coords: [34.0740340777359, -118.45259914654663]},
     { name: "Sunset", coords: [34.07357364604605, -118.45072508943784]}, 
     { name: "Sunset Canyon", coords: [34.074822079848566, -118.45190496322606]},
-    { name: "BFIT", coords: [34.071833514101, -118.44988936493462]}
+    { name: "BFIT", coords: [34.071833514101, -118.44988936493462]},
+    //Westwood
+    { name: "Rocco's Tavern", coords: [34.06192188983, -118.44768521028487]},
+    { name: "In-N-Out", coords: [34.063090640224075, -118.44805833565613]},
+    { name: "Fat Sal's", coords: [34.06254445599399, -118.44801997449164]},
+    { name: "Diddy Reise", coords: [34.06305590443982, -118.44683847684578]},
 ];
 
 locations.forEach(function(place) {
