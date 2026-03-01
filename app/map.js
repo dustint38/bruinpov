@@ -48,7 +48,6 @@ function onMarkerClick(e){
     this.bindPopup("Viewing " + this.options.title).openPopup();
 }
 
-powell.on('click', onMarkerClick);
 
 //add marker function
 let currentMousePos = null;
