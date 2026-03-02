@@ -20,6 +20,7 @@ const locations = [
     { name: "Intramural Field", coords: [34.07222350096714, -118.44685585332665]},
     { name: "Wilson Plaza", coords: [34.07224571856205, -118.44418437316502]},
     { name: "Rosenfield Library", coords: [34.07434160821896, -118.44354446213977]},
+    { name: "Straus Stadium", coords: [34.07041731966196, -118.44889579795849]},
     //Dorms(Hill)
     { name: "Dykstra", coords: [34.070017463548986, -118.44998190222536]},
     { name: "Holly", coords: [34.07100868353439, -118.45193101231065]},
@@ -52,8 +53,41 @@ function onMarkerClick(e){
     this.bindPopup("Viewing " + this.options.title).openPopup();
 }
 
+    { name: "Diddy Riese", coords: [34.06305590443982, -118.44683847684578]},
+];
+
+locations.forEach(function(place) {
+    var marker = L.marker(place.coords, {title: place.name}).addTo(map);
+    marker.on('click', function() {
+        openSidebar(place.name, place.coords);
+    });
+});
+
 //add marker function
 let currentMousePos = null;
 map.on('mousemove', function(e) {
     currentMousePos = e.latlng;
 });
+
+//UCLA & Westwood buttons
+const VIEWS = {
+    ucla: { latlng: [34.0700, -118.4471], zoom: 17 },
+    westwood: { latlng: [34.0617, -118.4465], zoom: 16 }
+};
+
+let flyTarget = null;
+map.on('moveend', function() { flyTarget = null; });
+
+function bindButton(id, viewKey) {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        if (flyTarget === viewKey) return;
+        flyTarget = viewKey;
+        const v = VIEWS[viewKey];
+        map.flyTo(v.latlng, v.zoom, { duration: 1.2 });
+    });
+}
+
+bindButton("btnUCLA", "ucla");
+bindButton("btnWestwood", "westwood");
