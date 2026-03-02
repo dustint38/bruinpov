@@ -109,6 +109,13 @@ body {
   transform: scale(1.05);
 }
 
+.rnd-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 /* ── Map ─────────────────────────────────────────────────── */
 #map {
   flex: 1;
@@ -124,7 +131,7 @@ body {
   right: 0;
   width: 360px;
   height: 100vh;
-  background: #1e293b;
+  background: var(--bg);
   border-left: 1px solid var(--border-subtle);
   box-shadow: -8px 0 32px rgba(0,0,0,0.4);
   display: flex;
@@ -339,7 +346,7 @@ body {
   flex-direction: column;
   gap: 10px;
   flex-shrink: 0;
-  background: #1e293b;
+  background: var(--bg);
 }
 
 .recorder-bar {

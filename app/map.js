@@ -1,9 +1,22 @@
 //Load map of UCLA on webapp
-var map = L.map('map', {minZoom: 16, maxZoom: 18}).setView([34.0700, -118.4441], 17);
+var map = L.map('map', {minZoom: 16, maxZoom: 18}).setView([34.07180, -118.44793], 16);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+
+//custom UCLA marker icon
+const uclaIcon = L.divIcon({
+    className: '',
+    html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="40" viewBox="0 0 28 40" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45))">
+        <path d="M14 0C6.27 0 0 6.27 0 14c0 9.8 14 26 14 26S28 23.8 28 14C28 6.27 21.73 0 14 0z" fill="#2774AE"/>
+        <circle cx="14" cy="13" r="6" fill="#FFB81C"/>
+        <circle cx="14" cy="13" r="3.5" fill="#fff" opacity="0.85"/>
+    </svg>`,
+    iconSize: [28, 40],
+    iconAnchor: [14, 40],
+    popupAnchor: [0, -42]
+});
 
 //markers on landmarks
 const locations = [
@@ -16,10 +29,6 @@ const locations = [
     { name: "John Wooden Center", coords: [34.07124833718194, -118.44566951813452]},
     { name: "Pauley Pavilion", coords: [34.07036917769024, -118.44694507275653]},
     { name: "SAC", coords: [34.07161129674489, -118.44399668926333]},
-    { name: "Drake Stadium", coords: [34.07225904911323, -118.44858856033757]},
-    { name: "Intramural Field", coords: [34.07222350096714, -118.44685585332665]},
-    { name: "Wilson Plaza", coords: [34.07224571856205, -118.44418437316502]},
-    { name: "Rosenfield Library", coords: [34.07434160821896, -118.44354446213977]},
     { name: "Straus Stadium", coords: [34.07041731966196, -118.44889579795849]},
     //Dorms(Hill)
     { name: "Dykstra", coords: [34.070017463548986, -118.44998190222536]},
@@ -38,12 +47,10 @@ const locations = [
     { name: "Rocco's Tavern", coords: [34.06192188983, -118.44768521028487]},
     { name: "In-N-Out", coords: [34.063090640224075, -118.44805833565613]},
     { name: "Fat Sal's", coords: [34.06254445599399, -118.44801997449164]},
-    { name: "Diddy Reise", coords: [34.06305590443982, -118.44683847684578]},
+    { name: "Diddy Riese", coords: [34.06305590443982, -118.44683847684578]},
 ];
-
-//add each of the landmarks on map
 locations.forEach(function(place) {
-    var marker = L.marker(place.coords, {title: place.name}).addTo(map);
+    var marker = L.marker(place.coords, {title: place.name, icon: uclaIcon}).addTo(map);
     marker.on('click', function() {
         openSidebar(place.name, place.coords);
     });
@@ -57,8 +64,8 @@ map.on('mousemove', function(e) {
 
 //UCLA & Westwood buttons
 const VIEWS = {
-    ucla: { latlng: [34.0700, -118.4471], zoom: 17 },
-    westwood: { latlng: [34.0617, -118.4465], zoom: 16 }
+    ucla: { latlng: [34.07289, -118.44798], zoom: 16.5 },
+    westwood: { latlng: [34.0617, -118.4465], zoom: 16.5 }
 };
 
 let flyTarget = null;
