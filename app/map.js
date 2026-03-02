@@ -38,22 +38,21 @@ const locations = [
 ];
 
 locations.forEach(function(place) {
-    var marker = L.marker(place.coords, {title: place.name}).addTo(map);
+    var marker = L.marker(place.coords, {title: place.name, coords: place.coords}).addTo(map);
 
     marker.bindPopup("<b>" + place.name);
     marker.on('click', onMarkerClick);
 });
 
 function onMarkerClick(e){
-    openSidebar(this.options.title);
+    openSidebar(this.options.title, this.options.coords);
 }
 
-// TODO(human): implement openSidebar(locationName) and closeSidebar()
-// openSidebar should: put the name in #sidebar-title, add class "open" to #sidebar
-// closeSidebar should: remove class "open" from #sidebar
 
 //add marker function
 let currentMousePos = null;
 map.on('mousemove', function(e) {
     currentMousePos = e.latlng;
 });
+
+

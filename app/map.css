@@ -5,7 +5,7 @@ html, body {
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-# app {
+#app {
     display: flex;
     height: 100vh;
     width: 100%;
@@ -15,7 +15,7 @@ html, body {
     flex: 1;
     height: 100vh;
     z-index: 1;
-    transition: margin-right 0.35s cubic-bezier
+    transition: margin-right 0.35s cubic-(0.4,0,0.2,1);
 }
 
 /* ─── Sidebar ─────────────────────────────────────────────── */
