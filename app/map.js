@@ -56,10 +56,15 @@ const VIEWS = {
     westwood: { latlng: [34.0617, -118.4465], zoom: 17 }
 };
 
+let flyTarget = null;
+map.on('moveend', function() { flyTarget = null; });
+
 function bindButton(id, viewKey) {
     const btn = document.getElementById(id);
     if (!btn) return;
     btn.addEventListener("click", function () {
+        if (flyTarget === viewKey) return;
+        flyTarget = viewKey;
         const v = VIEWS[viewKey];
         map.flyTo(v.latlng, v.zoom, { duration: 1.2 });
     });
