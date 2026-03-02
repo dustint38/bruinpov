@@ -13,18 +13,13 @@
 
         <!-- Supabase -->
         <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    </head>
-    
-    <body>
-         <div id="map"></div>
 
-         <div id="sidebar">
-             <button id="sidebar-close" onclick="closeSidebar()">✕</button>
-             <h2 id="sidebar-title"></h2>
-             <div id="sidebar-content"></div>
-         </div>
-
-         <script src="supabase.js"></script>
-         <script src="map.js"></script>
-    </body>
+    <!-- App scripts — must come after Leaflet + Supabase above -->
+        <script src="supabase.js"></script>
+        <script src="map.js"></script>
+        <script src="sidebar.js"></script>
+        </head>
+        <body>
+            <div id="map"></div>
+        </body>
 </html>
