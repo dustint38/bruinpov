@@ -34,7 +34,7 @@ const locations = [
     { name: "Rocco's Tavern", coords: [34.06192188983, -118.44768521028487]},
     { name: "In-N-Out", coords: [34.063090640224075, -118.44805833565613]},
     { name: "Fat Sal's", coords: [34.06254445599399, -118.44801997449164]},
-    { name: "Diddy Reise", coords: [34.06305590443982, -118.44683847684578]},
+    { name: "Diddy Riese", coords: [34.06305590443982, -118.44683847684578]},
 ];
 
 locations.forEach(function(place) {
@@ -45,9 +45,12 @@ locations.forEach(function(place) {
 });
 
 function onMarkerClick(e){
-    this.bindPopup("Viewing " + this.options.title).openPopup();
+    openSidebar(this.options.title);
 }
 
+// TODO(human): implement openSidebar(locationName) and closeSidebar()
+// openSidebar should: put the name in #sidebar-title, add class "open" to #sidebar
+// closeSidebar should: remove class "open" from #sidebar
 
 //add marker function
 let currentMousePos = null;
