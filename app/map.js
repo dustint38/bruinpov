@@ -39,18 +39,10 @@ const locations = [
 
 locations.forEach(function(place) {
     var marker = L.marker(place.coords, {title: place.name}).addTo(map);
-
-    marker.bindPopup("<b>" + place.name);
-    marker.on('click', onMarkerClick);
+    marker.on('click', function() {
+        openSidebar(place.name, place.coords);
+    });
 });
-
-function onMarkerClick(e){
-    openSidebar(this.options.title);
-}
-
-// TODO(human): implement openSidebar(locationName) and closeSidebar()
-// openSidebar should: put the name in #sidebar-title, add class "open" to #sidebar
-// closeSidebar should: remove class "open" from #sidebar
 
 //add marker function
 let currentMousePos = null;
