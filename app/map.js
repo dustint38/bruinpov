@@ -39,21 +39,31 @@ const locations = [
 
 locations.forEach(function(place) {
     var marker = L.marker(place.coords, {title: place.name}).addTo(map);
-
-    marker.bindPopup("<b>" + place.name);
-    marker.on('click', onMarkerClick);
+    marker.on('click', function() {
+        openSidebar(place.name, place.coords);
+    });
 });
-
-function onMarkerClick(e){
-    openSidebar(this.options.title);
-}
-
-// TODO(human): implement openSidebar(locationName) and closeSidebar()
-// openSidebar should: put the name in #sidebar-title, add class "open" to #sidebar
-// closeSidebar should: remove class "open" from #sidebar
 
 //add marker function
 let currentMousePos = null;
 map.on('mousemove', function(e) {
     currentMousePos = e.latlng;
 });
+
+//UCLA & Westwood buttons
+const VIEWS = {
+    ucla: { latlng: [34.0700, -118.4441], zoom: 17 },
+    westwood: { latlng: [34.0617, -118.4465], zoom: 16 }
+};
+
+function bindButton(id, viewKey) {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        const v = VIEWS[viewKey];
+        map.flyTo(v.latlng, v.zoom, { duration: 1.2 });
+    });
+}
+
+bindButton("btnUCLA", "ucla");
+bindButton("btnWestwood", "westwood");
