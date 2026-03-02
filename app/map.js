@@ -1,5 +1,5 @@
 //Load map of UCLA on webapp
-var map = L.map('map', {minZoom: 16, maxZoom: 19}).setView([34.0700, -118.4441], 17);
+var map = L.map('map', {minZoom: 16, maxZoom: 18}).setView([34.0700, -118.4441], 17);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -53,7 +53,7 @@ map.on('mousemove', function(e) {
 //UCLA & Westwood buttons
 const VIEWS = {
     ucla: { latlng: [34.0700, -118.4441], zoom: 17 },
-    westwood: { latlng: [34.0617, -118.4465], zoom: 16 }
+    westwood: { latlng: [34.0617, -118.4465], zoom: 17 }
 };
 
 function bindButton(id, viewKey) {
