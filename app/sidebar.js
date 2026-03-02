@@ -129,7 +129,18 @@ window.toggleCardAudio = function(btn) {
 
     _audio = new Audio(url); _audioBtn = btn; _audioMemId = memId;
     btn.textContent='\u23F9'; btn.classList.add('playing');
-    _audio.play().catch(e=>console.error(e));
+    _audio.play().catch(e=>{
+        console.error(e);
+        btn.textContent='\u25B6'; btn.classList.remove('playing');
+        _audio=null; _audioBtn=null; _audioMemId=null;
+    });
+
+    _audio.onerror = function() {
+        btn.textContent='\u25B6'; btn.classList.remove('playing');
+        clearInterval(_barInt); resetBars(memId);
+        _audio=null; _audioBtn=null; _audioMemId=null;
+        alert('Could not load audio. Check that the "audio" bucket is public in Supabase.');
+    };
 
     _audio.onloadedmetadata = function() {
         const el = document.getElementById('audio-time-'+memId);
@@ -204,6 +215,8 @@ function resetCompose() {
     setRecLabel('Tap \uD83D\uDD34 to record a voice memo', false);
     const timer = document.getElementById('rec-timer');
     if (timer) timer.style.display='none';
+    const preview = document.getElementById('rec-preview');
+    if (preview) { preview.src=''; preview.style.display='none'; }
     const rb = document.getElementById('rec-btn');
     if (rb) rb.classList.remove('recording');
 }
@@ -257,6 +270,9 @@ function stopRec() {
             window._recStream.getTracks().forEach(t=>t.stop());
             document.getElementById('rec-btn').classList.remove('recording');
             setRecLabel('\u2713 Voice memo ready ('+recSeconds+'s)', true);
+            const preview = document.getElementById('rec-preview');
+            preview.src = URL.createObjectURL(pendingBlob);
+            preview.style.display = 'block';
             resolve();
         };
         window._mediaRecorder.stop();
@@ -292,7 +308,9 @@ window.submitPost = async function() {
             const { data: urlData } = db.storage.from('audio').getPublicUrl(filename);
             audioUrl = urlData.publicUrl;
         } else {
-            console.error('Audio upload error:', upErr);
+            postBtn.disabled=false; postBtn.textContent='Post Memory';
+            alert('Audio upload failed: ' + upErr.message + '\n\nMake sure the "audio" bucket exists and is public in Supabase Storage.');
+            return;
         }
     }
 
@@ -371,6 +389,7 @@ function esc(s) {
                     '<span class="rec-label" id="rec-label">Tap \uD83D\uDD34 to record a voice memo</span>' +
                     '<span class="rec-timer" id="rec-timer" style="display:none">00:00</span>' +
                 '</div>' +
+                '<audio id="rec-preview" controls style="display:none; width:100%; margin-top:4px; accent-color:#2774AE;"></audio>' +
                 '<textarea class="compose-textarea" id="compose-text" placeholder="Add a note\u2026 (optional if you have a voice memo)"></textarea>' +
                 '<div class="compose-tags">'+tagsHTML+'</div>' +
                 '<div class="compose-actions">' +
