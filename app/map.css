@@ -109,6 +109,13 @@ body {
   transform: scale(1.05);
 }
 
+.rnd-btn {
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 /* ── Map ─────────────────────────────────────────────────── */
 #map {
   flex: 1;
