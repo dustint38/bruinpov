@@ -44,20 +44,6 @@ const locations = [
 //add each of the landmarks on map
 locations.forEach(function(place) {
     var marker = L.marker(place.coords, {title: place.name}).addTo(map);
-
-    marker.bindPopup("<b>" + place.name);
-    marker.on('click', onMarkerClick);
-});
-
-function onMarkerClick(e){
-    this.bindPopup("Viewing " + this.options.title).openPopup();
-}
-
-    { name: "Diddy Riese", coords: [34.06305590443982, -118.44683847684578]},
-];
-
-locations.forEach(function(place) {
-    var marker = L.marker(place.coords, {title: place.name}).addTo(map);
     marker.on('click', function() {
         openSidebar(place.name, place.coords);
     });
