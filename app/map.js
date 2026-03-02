@@ -54,3 +54,21 @@ let currentMousePos = null;
 map.on('mousemove', function(e) {
     currentMousePos = e.latlng;
 });
+
+//UCLA & Westwood buttons
+const VIEWS = {
+    ucla: { latlng: [34.0700, -118.4441], zoom: 17 },
+    westwood: { latlng: [34.0617, -118.4465], zoom: 16 }
+};
+
+function bindButton(id, viewKey) {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+        const v = VIEWS[viewKey];
+        map.flyTo(v.latlng, v.zoom, { duration: 1.2 });
+    });
+}
+
+bindButton("btnUCLA", "ucla");
+bindButton("btnWestwood", "westwood");
