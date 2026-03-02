@@ -45,7 +45,7 @@ export function stopRecording() {
             currentStream.getTracks().forEach(t => t.stop());
 
             console.log('Recording stopped');
-            resolve({ audioBlod, audioUrl });
+            resolve({ audioBlob, audioUrl });
         };
 
         mediaRecorder.stop();
